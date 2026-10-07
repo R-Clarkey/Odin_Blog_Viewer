@@ -1,5 +1,9 @@
 const API_URL = import.meta.env.VITE_API_URL
-
+/**
+ * @param {string} endpoint
+ * @param {RequestInit} options method and body 
+ * @returns {Promise<any>}
+ */
 export async function apiConnect(endpoint, options = {}) {
     const token = localStorage.getItem("token")
 
@@ -16,9 +20,12 @@ export async function apiConnect(endpoint, options = {}) {
     {...options, headers}
     )
 
-    if(!response.ok) {
-        throw new Error("Request failed")
+    const data = await response.json().catch(() => null)
+    console.log(response, "Response")
+
+    if (!response.ok) {
+        throw new Error(data?.message || `Request failed (${response.status})`)
     }
 
-    return response.json()
+    return data
 }
