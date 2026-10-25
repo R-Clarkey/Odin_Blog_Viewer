@@ -3,6 +3,15 @@ import { getPosts } from "../api/posts"
 import { Link } from "react-router-dom"
 import "../styles/posts.css"
 
+function getPreviewText(html, maxLength = 120) {
+	const temp = document.createElement("div")
+	temp.innerHTML = html
+	const text = temp.textContent || temp.innerText || "No content added"
+
+	return text.length > maxLength
+		? text.slice(0, maxLength) + "..."
+		: text
+}
 
 export default function Posts() {
     const [posts, setPosts] = useState([])
@@ -37,14 +46,13 @@ export default function Posts() {
 						<Link className="post-link" to={`/post/${post.id}`}>
 							<h2 className="post-title">{post.title || "Default title"}</h2>
 							<p className="post-content">
-								post.content
+								{getPreviewText(post.content, 120)}
 							</p>
 							<div className="post-meta">
 								<span className="post-author">{post.author?.name}</span>
 								<span>{new Date(post.createdAt).toLocaleDateString()}</span>
 							</div>
 						</Link>
-							{post.published ? "Published" : "Draft"}
 					</li>
 				))}
 			</ul>

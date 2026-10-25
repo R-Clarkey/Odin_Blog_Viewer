@@ -1,51 +1,56 @@
-import { apiConnect } from "../api/client";
-import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { apiConnect } from "../api/client"
+import { useNavigate } from "react-router-dom"
+import { useState } from "react"
 
 export default function Login() {
-  const [email, setEmail] = useState("")
-  const [password, setPassword] = useState("")
+	const [email, setEmail] = useState("")
+	const [password, setPassword] = useState("")
+	const [error, setError] = useState("")
 
-  const navigate = useNavigate()
+	const navigate = useNavigate()
 
-  const handleSubmit = async (e) => {
-    e.preventDefault()
+	const handleSubmit = async (e) => {
+		e.preventDefault()
+		setError("")
 
-    try {
-      const data = await apiConnect("/auth/login", {
-        method: "POST",
-        body: JSON.stringify({ email, password }),
-      })
-      localStorage.setItem("token", data);
-      navigate("/")
-    } catch (error) {
-      console.log(error.message)
-    }
-  }
+		try {
+			const data = await apiConnect("/auth/login", {
+				method: "POST",
+				body: JSON.stringify({ email, password }),
+			})
 
-  return (
-    <main className="auth-page">  
-      <form onSubmit={handleSubmit} className="auth-form">
-        <h2>Login</h2>
+			localStorage.setItem("token", data.token)
+			navigate("/")
+		} catch (error) {
+			setError(error.message)
+		}
+	}
 
-        <input
-          name="email"
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
+	return (
+		<main className="auth-page">
+			<form onSubmit={handleSubmit} className="auth-form">
+				<h2>Login</h2>
 
-        <input
-          name="password"
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
+				<input
+					name="email"
+					type="email"
+					placeholder="Email"
+					value={email}
+					onChange={(e) => setEmail(e.target.value)}
+				/>
 
-        <button type="submit">Login</button>
-      </form>
-    </main>
-  )
+				<input
+					name="password"
+					type="password"
+					placeholder="Password"
+					value={password}
+					onChange={(e) => setPassword(e.target.value)}
+				/>
+
+				{error && <p className="error-message">{error}</p>}
+
+				<button type="submit">Login</button>
+			</form>
+		</main>
+	)
 }

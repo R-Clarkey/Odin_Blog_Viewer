@@ -1,0 +1,105 @@
+.author-box {
+	background: linear-gradient(180deg, rgba(56, 189, 248, 0.15), rgba(15, 23, 42, 0.9));
+	border: 1px solid rgba(148, 163, 184, 0.2);
+	border-radius: 20px;
+	padding: 1rem 1rem;
+	box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+	color: var(--text);
+	width: 100%;
+	max-width: 420px;
+	margin: 0 auto;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.author-box-button {
+	padding: 0.65rem 1rem;
+	border: 1px solid var(--button-border);
+	border-radius: 10px;
+	background: var(--button-background);
+	color: var(--text);
+	font: inherit;
+	font-weight: 600;
+	cursor: pointer;
+	transition: transform 0.15s ease, background 0.15s ease, opacity 0.15s ease;
+    align-self: center;
+}
+
+.author-box-button:hover {
+	transform: translateY(-1px);
+	background: var(--button-background-hover);
+}
+
+.author-form {
+	margin-top: 1rem;
+	display: flex;
+	flex-direction: column;
+	gap: 0.75rem;
+}
+
+.author-box-text {
+	margin: 0;
+	color: var(--muted);
+	font-size: 0.95rem;
+}
+
+.author-label {
+	font-size: 0.9rem;
+	font-weight: 600;
+	color: var(--text);
+}
+
+.author-input {
+	width: 100%;
+	padding: 0.75rem 0.9rem;
+	border-radius: 10px;
+	border: 1px solid rgba(255, 255, 255, 0.1);
+	background: rgba(255, 255, 255, 0.04);
+	color: var(--text);
+	outline: none;
+}
+
+.author-input:focus {
+	border-color: var(--accent-soft);
+	box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.18);
+}
+
+.author-error {
+	margin: 0;
+	color: #f87171;
+	font-size: 0.9rem;
+}
+
+.author-message {
+	margin: 0;
+	color: #4ade80;
+	font-size: 0.9rem;
+}
+
+.author-actions {
+	display: flex;
+	gap: 0.75rem;
+	margin-top: 0.25rem;
+}
+
+.author-actions button{
+	padding: 0.7rem 1rem;
+	border-radius: 10px;
+	border: none;
+	cursor: pointer;
+	font-weight: 600;
+	transition: opacity 0.2s ease, transform 0.2s ease;
+	background-color: var(--button-background);
+	border: 1px solid var(--button-border);
+	color: var(--text);
+}
+
+.author-actions button:hover{
+	transform: translateY(-1px);
+	background-color: var(--button-background-hover);
+	border: 1px solid var(--button-border-hover);
+}
+
+
+

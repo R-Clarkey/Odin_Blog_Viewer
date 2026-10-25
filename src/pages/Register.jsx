@@ -6,6 +6,7 @@ export default function Register() {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [error, setError] = useState("")
 
     const navigate = useNavigate()
 
@@ -25,6 +26,7 @@ export default function Register() {
         localStorage.setItem("token", data.token);
         navigate("/")
     } catch (error) {
+        setError(error.message)
         console.log(error.message)
     }
     }   
@@ -57,7 +59,7 @@ export default function Register() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 />
-
+				{error && <p className="error-message">{error}</p>}
                 <button type="submit">Register</button>
             </form>
         </main>
